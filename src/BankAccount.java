@@ -1,5 +1,5 @@
-// File:         BankAccountV2
-// Created:      2016/04/14 creation date
+// File:         BankAccountGUI
+// Created:      2016/06/02 creation date
 // Last Changed: Date: 2016/04/19 
 // Author:       Drew Burritt
 

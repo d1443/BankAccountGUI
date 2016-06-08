@@ -25,13 +25,13 @@ public class Interface extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtAmount;
 	private JButton btnFinish;
-	private JButton btnNewButton_1;
 	JRadioButton rdbtnChequing;
 	JRadioButton rdbtnSaving;
 	JRadioButton rdbtnWithdrawal;
 	JRadioButton rdbtnDeposit;
 	JLabel lblBalance;
 	private double amount;
+	private BankAccount account;
 	public BankAccount Chequing = new BankAccount("Chequing");
 	public BankAccount Saving = new BankAccount("Saving");
 
@@ -55,6 +55,7 @@ public class Interface extends JFrame {
 	 * Create the frame.
 	 */
 	public Interface() {
+		setTitle("Bank Account");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 270, 239);
 		contentPane = new JPanel();
@@ -137,12 +138,8 @@ public class Interface extends JFrame {
 	
 
 		
-		btnFinish.setBounds(10, 166, 112, 23);
+		btnFinish.setBounds(75, 166, 109, 23);
 		contentPane.add(btnFinish);
-		
-		btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(139, 166, 89, 23);
-		contentPane.add(btnNewButton_1);
 		
 		lblBalance = new JLabel("Balance: ");
 		lblBalance.setBounds(10, 141, 165, 14);
@@ -162,17 +159,17 @@ public class Interface extends JFrame {
 	
 	protected void btnFinish_mouseClicked(MouseEvent e)
 	{
-		BankAccount account;
-		String action = "";
 		this.amount = Double.parseDouble(txtAmount.getText());
-		if (this.rdbtnChequing.isSelected())
-		{
-			account = Chequing;
-		}
-		else 
-		{
-			account = Saving;
-		}
+		preformAction(getSelectedAccount(),getSelectedAction());
+		
+	}
+	public BankAccount getAccount()
+	{
+		return account;
+	}
+	private String getSelectedAction()
+	{
+		String action = "";
 		if (this.rdbtnDeposit.isSelected())
 		{
 			action = "deposit";
@@ -181,10 +178,21 @@ public class Interface extends JFrame {
 		{
 			action = "withdrawal";
 		}
+		return action;
 		
+	}
+	private BankAccount getSelectedAccount()
+	{
 		
-		preformAction(account,action);
-		
+		if (this.rdbtnChequing.isSelected())
+		{
+			account = Chequing;
+		}
+		else 
+		{
+			account = Saving;
+		}
+		return account;
 	}
 	public void preformAction(BankAccount account, String action)
 	{
@@ -231,4 +239,5 @@ public class Interface extends JFrame {
 	{
 		update(Saving);
 	}
+	
 }
